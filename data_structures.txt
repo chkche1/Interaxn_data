@@ -1,0 +1,26 @@
+some metrics are ommitted
+
+Basis B1 Band
+
+Basis band returns a JSON object called Metrics, with child nodes as follows.
+Each measurement node (skin temp, heartrate, etc.) has the same attributes.
+Metrics has a child node named bodystates which describes activity states as defined by Basis.
+
+- Metrics:
+
+-- skin_temp, heartrate, air_temp, calories, gsr, steps
+--- min
+--- max
+--- sum
+--- avg (mean)
+--- stdev
+--- values (1 per min)
+
+-- bodystates
+--- starttime
+--- endtime
+--- description
+
+-- interval (sampling interval)
+-- starttime (sec since epoch?)
+-- endtime (sec since epoch?)
