@@ -8,7 +8,7 @@ Metrics has a child node named bodystates which describes activity states as def
 
 - Metrics:
 
--- skin_temp, heartrate, air_temp, calories, gsr, steps
+-- skin_temp, heartrate, air_temp, calories, gsr (galvanic skin response), steps
 --- min
 --- max
 --- sum
