@@ -46,7 +46,9 @@ http://odetocode.com/blogs/scott/archive/2013/07/02/building-a-filereader-servic
 
 
 
-# Logging
+# $resource
 
+http://stackoverflow.com/questions/13849902/reading-in-json-through-angular-resources-service
+http://stackoverflow.com/questions/13269882/angularjs-resource-restful-example
 
 
