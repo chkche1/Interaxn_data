@@ -8,7 +8,7 @@ angular.module('myApp.controllers', []).
 
     var sleepPromise = sleepDataService.retrieveData();
     sleepPromise.then(function(response){
-        $log.log("Success", response);}, 
+        $log.log("Success", response);},
       function (response){
         $log.log("Error", response)});
     $scope.sleepData = sleepPromise;
