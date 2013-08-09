@@ -7,7 +7,7 @@ angular.module('myApp.services', []).
   service('sleepDataService', function($http, $log, $q){
       // List all the functions provided by sleepDataService
       this.retrieveData =  function(){
-        var getURL = "/sample_data/jawbone_2013.json";
+        var getURL = "/sample_data/jawbone_2013_s.json";
         return $http.get(getURL).
           success(function(data, status, headers, config){
           $log.log("success!");
