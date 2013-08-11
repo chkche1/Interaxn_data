@@ -67,7 +67,7 @@ var svg = d3.select("body").append("svg")
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Population");
+      .text("Sleep Duration");
 
   var state = svg.selectAll(".DATE")
       .data(graphData)
