@@ -12,7 +12,7 @@ angular.module('myApp.controllers', []).
       $log.log(response.data);
 
             // stacked bar chart
- 
+
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -42,10 +42,10 @@ var svg = d3.select("body").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       var graphData = response.data;
-    color.domain(d3.keys(graphData[0]).filter(function(key) { return key !== "DATE"; }));      
+    color.domain(d3.keys(graphData[0]).filter(function(key) { return key !== "DATE"; }));
       graphData.forEach(function(d){
         var y0 = 0;
-        d.classes = color.domain().map(function(name){ 
+        d.classes = color.domain().map(function(name){
           return {name:name,y0:y0,y1:y0+=parseFloat(d[name])}});
         d.total = d.classes[d.classes.length-1].y1;
 
