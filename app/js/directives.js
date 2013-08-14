@@ -10,7 +10,7 @@ angular.module('myApp.directives', []).
   }]);
 
 angular.module('myApp.directives', [])
-    .directive('dangleAreaGraph', [function() {
+    .directive('d3AreaGraph', [function() {
         'use strict';
 
         return {

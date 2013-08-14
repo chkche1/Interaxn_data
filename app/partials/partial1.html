@@ -1,5 +1,6 @@
 
 <p>This is the partial for view 1.</p>
+
 <div>
   <p>{{ test }}</p>
 
@@ -28,7 +29,9 @@
       </tr>
     </tbody>
   </table>
+
   <h3 ng-hide="!selectedDate">Your sleep quality on {{selectedDate | date }} was {{selectedDateSleepQuality}}</h3>
-  <dangle-area-graph label="Sleep Quality" xfield="DATE" yfield="s_quality" on-click="selectDate" bind="sleepData.data" />
+  <d3-area-graph label="Sleep Quality" xfield="DATE" yfield="s_quality" on-click="selectDate" bind="sleepData.data" />
+
 </div>
 
