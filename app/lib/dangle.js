@@ -126,7 +126,7 @@ angular.module('dangle')
                     .attr('transform', 'translate(0,' + height + ')')
                     .call(xAxis);
 
-                // insert the x axis (no data yet)
+                // insert the y axis (no data yet)
                 svg.append('g')
                     .attr('class', 'area y axis ' + klass)
                     .call(yAxis)
