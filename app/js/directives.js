@@ -187,7 +187,7 @@ angular.module('myApp.directives', [])
                             // wire up any events (registers filter callback)
                             points.on('mousedown', function(d) {
                                 scope.$apply(function() {
-                                    (scope.onClick || angular.noop)(field, d[scope.xfield]);
+                                    (scope.onClick || angular.noop)(new Date(d[scope.xfield].slice(0,4), d[scope.xfield].slice(4,6), d[scope.xfield].slice(6,8)), d[scope.yfield]);
                                 });
                             });
 

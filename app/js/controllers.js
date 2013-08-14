@@ -6,6 +6,13 @@ angular.module('myApp.controllers', []).
   controller('SleepCtrl', function($scope, $http, $log, $q, sleepDataService) {
     $scope.test = "testData";
 
+    // this can be refactored to get a SleepData object
+    // with more attributes such as light sleep, deep sleep, etc.
+    $scope.selectDate = function(date, quality){
+      $scope.selectedDate = date;
+      $scope.selectedDateSleepQuality = quality;
+    };
+
     var sleepPromise = sleepDataService.retrieveData();
     sleepPromise.then(function(response){
       $log.log("Success", response);
