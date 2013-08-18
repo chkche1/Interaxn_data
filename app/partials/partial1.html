@@ -33,6 +33,6 @@
 
   <h3 ng-hide="!selectedDate">Your sleep quality on {{selectedDate | date }} was {{selectedDateSleepQuality}}</h3>
   <d3-area-graph label="Sleep Quality" xfield="DATE" yfield="s_quality" on-click="selectDate" bind="sleepData.data" />
-  <d3-stacked-bar-chart data="sleepData.data" yfields="s_light, s_deep" xfield="DATE" />
+  <d3-stacked-bar-chart data="sleepData.data" yfields="s_light, s_deep" xfield="DATE" height="250" />
 </div>
 

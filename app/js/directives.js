@@ -58,7 +58,7 @@ angular.module('myApp.directives', [])
                   xValues.push(d[xAxisField]);
                   return {
                     x: d[xAxisField],
-                    y: d[fieldNames[i]]
+                    y: +d[fieldNames[i]]
                   };
                 })
               });
@@ -76,7 +76,7 @@ angular.module('myApp.directives', [])
             var yScale = d3.scale.linear()
                                  .domain([0, d3.max(stackData, function(d){
                                   return d3.max(d.values, function(d){
-                                      return +d.y0 + +d.y;
+                                      return d.y0 + d.y;
                                     });
                                   })
                                  ])
@@ -115,7 +115,8 @@ angular.module('myApp.directives', [])
                                 return xScale(i);
                               })
                               .attr("y", function(d){
-                                return yScale(d.y0);
+                                console.log(d);
+                                return height-yScale(d.y0 + d.y);
                               })
                               .attr("height", function(d){
                                 return yScale(d.y);
