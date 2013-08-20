@@ -9,6 +9,17 @@ directive('appVersion', ['version', function(version) {
   };
 }]);
 
+// Stacked bar chart directive
+// requires D3.js
+// Created Aug 17, 2013 by Benjamin Shyong
+// hello@benshyong.com
+//  DIRECTIVE OPTIONS
+//    width: the width of the chart
+//    height: the height of the chart
+//    barPadding: amount of padding between bars
+//    yfields: field names for y-axis data
+//    xfield: field name for x-axis data
+//    data: data source
 angular.module('myApp.directives', [])
   .directive('d3StackedBarChart', [function(){
     var directiveDefinitionObject = {
@@ -20,14 +31,6 @@ angular.module('myApp.directives', [])
       //    the attr attribute.
       // '&' provides a way to execute an expression in
       //    the context of the parent scope.
-
-      // DIRECTIVE OPTIONS
-      // width: the width of the chart
-      // height: the height of the chart
-      // barPadding: amount of padding between bars
-      // yfields: field names for y-axis data
-      // xfield: field name for x-axis data
-      // data: data source
       scope: {
         width: '@',
         height: '@',
@@ -40,6 +43,7 @@ angular.module('myApp.directives', [])
       link: function(scope, element, attrs){
         scope.$watch('data', function(data){
           if(data){
+            var legendWidth = 100;
             var width = scope.width || 500;
             var height = scope.height || 200;
             var barPadding = scope.barPadding || 0.051;
@@ -90,7 +94,7 @@ angular.module('myApp.directives', [])
                         .html('')
                         .append("svg")
                         .attr('preserveAspectRatio', 'xMinYMin')
-                        .attr("width", width)
+                        .attr("width", width+legendWidth)
                         .attr("height", height);
 
             // add groups for each y-axis field
@@ -115,13 +119,36 @@ angular.module('myApp.directives', [])
                                 return xScale(i);
                               })
                               .attr("y", function(d){
-                                console.log(d);
                                 return height-yScale(d.y0 + d.y);
                               })
                               .attr("height", function(d){
                                 return yScale(d.y);
                               })
                               .attr("width", xScale.rangeBand());
+
+          // add groups for legend
+          var legend = svg.selectAll(".legend")
+              .data(stackData)
+              .enter()
+              .append("g")
+              .attr("class", "legend")
+              .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+          legend.append("rect")
+              .attr("x", width+legendWidth - 18)
+              .attr("width", 18)
+              .attr("height", 18)
+              .style("fill", function(d,i){
+                return colors(i);
+              });
+
+          legend.append("text")
+              .attr("x", width+legendWidth - 24)
+              .attr("y", 9)
+              .attr("dy", ".35em")
+              .style("text-anchor", "end")
+              .text(function(d) { return d.name; });
+
           }
           else{
             d3.select(element[0]).append("b").text("No Data!");
