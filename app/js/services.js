@@ -24,6 +24,5 @@ angular.module('myApp.services', []).
           then(function (response){
           return response.data;
         }, function(response){$log.log("failure!!!")});*/
-    };
-
+      };
   });

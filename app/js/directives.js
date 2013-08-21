@@ -38,7 +38,8 @@ angular.module('myApp.directives', [])
         yfields: '@',
         xfield: '@',
         data: '=',
-        onClick: '&'
+        onClick: '=',
+        onMouseover: '='
       },
       link: function(scope, element, attrs){
         scope.$watch('data', function(data){
@@ -62,7 +63,8 @@ angular.module('myApp.directives', [])
                   xValues.push(d[xAxisField]);
                   return {
                     x: d[xAxisField],
-                    y: +d[fieldNames[i]]
+                    y: +d[fieldNames[i]],
+                    group: fieldNames[i]
                   };
                 })
               });
@@ -108,8 +110,9 @@ angular.module('myApp.directives', [])
                             .attr("name", function(d){
                               return d.name;
                             });
+
             // add bars for each group
-            var rects = groups.selectAll("rect")
+            var bars = groups.selectAll("rect")
                               .data(function(d){
                                 return d.values;
                               })
@@ -124,7 +127,10 @@ angular.module('myApp.directives', [])
                               .attr("height", function(d){
                                 return yScale(d.y);
                               })
-                              .attr("width", xScale.rangeBand());
+                              .attr("width", xScale.rangeBand())
+                              .attr("class", function(d){
+                                return d.group + ' d_' + d.x;
+                              });
 
           // add groups for legend
           var legend = svg.selectAll(".legend")
@@ -148,6 +154,27 @@ angular.module('myApp.directives', [])
               .attr("dy", ".35em")
               .style("text-anchor", "end")
               .text(function(d) { return d.name; });
+
+          var highlightedElement = svg.append("text")
+                                      .attr("y", 20);
+          // bind events
+          bars.on('mouseover', function(d) {
+            bars.classed("inactive", function(){
+              // indexOf returns the position of the string in the other string.
+              // If not found, it will return -1:
+              // In two's compliment systems, -1 is represented in binary as all Ones
+              // The bitwise inverse (~) of this is all zeros, or just zero, and therefore falsy.
+              return !~this.className.baseVal.indexOf(d.x);
+            });
+            groups.selectAll("rect.d_"+d.x).classed("active", true);
+            scope.$apply(function() {
+              (scope.onMouseover || angular.noop)(d.x);
+            });
+          })
+          .on('mouseout', function(d){
+            bars.classed("inactive", false);
+            d3.selectAll("rect.d_"+d.x).classed("active", false);
+          });
 
           }
           else{
