@@ -23,9 +23,9 @@ if __name__ == "__main__":
 
 
     for single_date in (start_date + datetime.timedelta(n) for n in range((end_date-start_date).days+1)):
-        filename = (basis_id +
+        filename = (time.strftime("%Y-%m-%d", single_date.timetuple()) +
                     "_" +
-                    time.strftime("%Y-%m-%d", single_date.timetuple()) +
+                    basis_id +
                     ".json")
         print "fetching data for " + time.strftime("%Y-%m-%d", single_date.timetuple())
         data = urllib.urlopen("https://app.mybasis.com/api/v1/chart/" + basis_id + ".json?start_date=" + \
