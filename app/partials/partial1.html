@@ -1,6 +1,9 @@
 
 <p>This is the partial for view 1.</p>
-
+    <h4 ng-click="fetchBasisBenData()"><a ng-hide="basisBenData.length > 1">click to load Ben's basis data</a></h4>
+    <p ng-repeat="b in basisBenData">
+      {{b.metrics}}
+    </p>
 <div>
   <div ng-hide="true">
     <p>{{ test }}</p>
